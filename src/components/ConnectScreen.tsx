@@ -1,15 +1,15 @@
 import { useState } from "react";
 
 export default function ConnectScreen() {
-  const [idInput, setIdInput] = useState("");
-  const [tokenInput, setTokenInput] = useState("");
+  const [idInput, setIdInput] = useState('');
+  const [tokenInput, setTokenInput] = useState('');
 
   return (
     <>
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="w-80 bg-white rounded-2xl p-6 shadow">
           <h1 className="text-lg font-medium text-center mb-4">
-            Подключение к чату
+            Chat Connecting
           </h1>
           <label className="text-sm text-gray-500">Instance ID</label>
           <input
