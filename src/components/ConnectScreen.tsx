@@ -1,8 +1,12 @@
 import { useState } from "react";
 
-export default function ConnectScreen() {
-  const [idInput, setIdInput] = useState('');
-  const [tokenInput, setTokenInput] = useState('');
+interface Props {
+  onConnect: (idInstance: string, apiTokenInstance: string) => void;
+}
+
+export default function ConnectScreen({ onConnect }: Props) {
+  const [idInput, setIdInput] = useState("");
+  const [tokenInput, setTokenInput] = useState("");
 
   return (
     <>
@@ -24,7 +28,10 @@ export default function ConnectScreen() {
             value={tokenInput}
             onChange={(e) => setTokenInput(e.target.value)}
           />
-          <button className="w-full bg-black text-white rounded-lg py-2">
+          <button
+            className="w-full bg-black text-white rounded-lg py-2"
+            onClick={() => onConnect(idInput, tokenInput)}
+          >
             Connect
           </button>
         </div>

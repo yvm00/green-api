@@ -2,7 +2,7 @@ import type { UserData } from "../types/userData";
 
 async function handleResponse(res: Response) {
   if (!res.ok) {
-    throw new Error(`Ошибка запроса: ${res.status} ${res.statusText}`);
+    throw new Error(`Request error: ${res.status} ${res.statusText}`);
   }
   return res.json();
 }

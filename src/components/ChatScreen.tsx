@@ -1,6 +1,3 @@
-export default function ChatScreen(){
-  return(
-    <>
-    </>
-  )
+export default function ChatScreen() {
+  return <div></div>;
 }
