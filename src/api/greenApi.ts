@@ -1,10 +1,11 @@
 import type { UserData } from "../types/userData";
 
-async function handleResponse(res: Response) {
-  if (!res.ok) {
-    throw new Error(`Request error: ${res.status} ${res.statusText}`);
+async function handleResponse(response: Response) {
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
-  return res.json();
+  const text = await response.text();
+  return text ? JSON.parse(text) : null;
 }
 
 export async function sendMessage(
@@ -23,7 +24,7 @@ export async function sendMessage(
   return handleResponse(res);
 }
 
-export async function getSettings({ idInstance, apiTokenInstance }: UserData,){
+export async function getSettings({ idInstance, apiTokenInstance }: UserData) {
   const res = await fetch(
     `https://api.green-api.com/waInstance${idInstance}/getSettings/${apiTokenInstance}`,
   );
@@ -35,7 +36,7 @@ export async function receiveNotification({
   apiTokenInstance,
 }: UserData) {
   const res = await fetch(
-    `https://api.green-api.com/waInstance${idInstance}/receiveNotification/${apiTokenInstance}`,
+    `https://api.green-api.com/waInstance${idInstance}/receiveNotification/${apiTokenInstance}?receiveTimeout=20`,
   );
   return handleResponse(res);
 }

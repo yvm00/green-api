@@ -13,27 +13,41 @@ export function usePolling(
   useEffect(() => {
     if (!userData || !active) return;
     isPollingActive.current = true;
+    let isCurrentEffectActive = true;
 
     async function poll() {
       while (isPollingActive.current) {
         try {
           const data = await receiveNotification(userData!);
-          if (!data) continue;
+          if (!isCurrentEffectActive) break;
+
+          if (!data) {
+            await new Promise((r) => setTimeout(r, 1000));
+            continue;
+          }
           if (!isPollingActive.current) break;
 
-          const text = data.body?.messageData?.textMessageData?.textMessage;
-          if (data.body?.typeWebhook === "incomingMessageReceived" && text) {
-            onMessage({
-              idMessage: data.body.idMessage,
-              text,
-              type: "incoming",
-              timestamp: Date.now(),
-            });
+          const body = data.body;
+
+          if (body?.typeWebhook === "incomingMessageReceived") {
+            const text =
+              body.messageData?.textMessageData?.textMessage ||
+              body.messageData?.extendedTextMessageData?.text;
+
+            if (text) {
+              onMessage({
+                idMessage: body.idMessage,
+                text,
+                type: "incoming",
+                timestamp: Date.now(),
+              });
+            }
           }
+
           await deleteNotification(userData!, data.receiptId);
         } catch (err) {
           console.error("Polling error:", err);
-          await new Promise((r) => setTimeout(r, 2000));
+          await new Promise((r) => setTimeout(r, 100));
         }
       }
     }
@@ -42,5 +56,5 @@ export function usePolling(
     return () => {
       isPollingActive.current = false;
     };
-  }, [userData, active]);
+  }, [userData, active, onMessage]);
 }

@@ -1,6 +1,6 @@
 import ConnectScreen from "./components/ConnectScreen";
 import ChatScreen from "./components/ChatScreen";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { UserData } from "./types/userData";
 import type { Message } from "./types/message";
 import { usePolling } from "./hooks/usePolling";
@@ -15,9 +15,14 @@ export default function App() {
   const [errors, setError] = useState<AppErrors>({ connect: null, send: null });
   const [isConnecting, setIsConnecting] = useState(false);
 
-  usePolling(userData, chatStarted, (msg) =>
-    setMessages((prev) => [...prev, msg]),
-  );
+  const handleIncomingMessage = useCallback((msg: Message) => {
+    setMessages((prev) => {
+      if (prev.some((m) => m.idMessage === msg.idMessage)) return prev;
+      return [...prev, msg];
+    });
+  }, []);
+
+  usePolling(userData, chatStarted, handleIncomingMessage);
 
   const handleSendMessage = async (text: string) => {
     setError((prev) => ({ ...prev, send: null }));
@@ -56,11 +61,14 @@ export default function App() {
   };
 
   useEffect(() => {
-    if (errors) {
-      const timer = setTimeout(() => setError({send: null, connect: null}), 2000);
+    if (errors.connect || errors.send) {
+      const timer = setTimeout(
+        () => setError({ send: null, connect: null }),
+        2000,
+      );
       return () => clearTimeout(timer);
     }
-  }, [errors]);
+  }, [errors.connect, errors.send]);
 
   if (!userData) {
     return (
