@@ -24,7 +24,7 @@ export function usePolling(
           const text = data.body?.messageData?.textMessageData?.textMessage;
           if (data.body?.typeWebhook === "incomingMessageReceived" && text) {
             onMessage({
-              id: crypto.randomUUID(),
+              idMessage: data.body.idMessage,
               text,
               type: "incoming",
               timestamp: Date.now(),

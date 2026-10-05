@@ -23,6 +23,13 @@ export async function sendMessage(
   return handleResponse(res);
 }
 
+export async function getSettings({ idInstance, apiTokenInstance }: UserData,){
+  const res = await fetch(
+    `https://api.green-api.com/waInstance${idInstance}/getSettings/${apiTokenInstance}`,
+  );
+  return handleResponse(res);
+}
+
 export async function receiveNotification({
   idInstance,
   apiTokenInstance,

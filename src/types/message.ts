@@ -1,5 +1,5 @@
 export interface Message {
-  id: string;
+  idMessage: string;
   text: string;
   type: 'incoming' | 'outcoming';
   timestamp: number
