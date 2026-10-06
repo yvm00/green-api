@@ -16,13 +16,13 @@ export function usePolling(
     let isCurrentEffectActive = true;
 
     async function poll() {
-      while (isPollingActive.current) {
+      while (isPollingActive.current && isCurrentEffectActive) {
         try {
           const data = await receiveNotification(userData!);
           if (!isCurrentEffectActive) break;
 
           if (!data) {
-            await new Promise((r) => setTimeout(r, 1000));
+            await new Promise((r) => setTimeout(r, 100));
             continue;
           }
           if (!isPollingActive.current) break;
@@ -47,14 +47,15 @@ export function usePolling(
           await deleteNotification(userData!, data.receiptId);
         } catch (err) {
           console.error("Polling error:", err);
-          await new Promise((r) => setTimeout(r, 100));
+          await new Promise((r) => setTimeout(r, 3000));
         }
       }
     }
 
     poll();
     return () => {
-      isPollingActive.current = false;
+      isPollingActive.current = false; 
+      isCurrentEffectActive = false;
     };
   }, [userData, active, onMessage]);
 }

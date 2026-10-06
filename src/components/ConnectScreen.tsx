@@ -20,7 +20,7 @@ export default function ConnectScreen({
       <div className="w-96 bg-white rounded-2xl p-6 shadow flex flex-col items-center justify-between">
         <div className="w-full flex flex-col items-center mb-2">
           <div className="w-14 h-14 bg-emerald-50 rounded-full flex items-center justify-center">
-            <Link className="text-emerald-600 text-[28px]" />
+            <Link className="text-emerald-600" size={28} />
           </div>
           <h1 className="text-[22px] font-semibold text-black text-center">
             Connection
