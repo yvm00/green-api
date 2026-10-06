@@ -1,7 +1,7 @@
 # ✦ WhatsApp Chat — GREEN-API
 
 A simple WhatsApp-style chat interface built with React and TypeScript, powered by GREEN-API.
-This project was developed as a technical assignment. It focuses on a single-chat messaging experience and basic text message exchange through GREEN-API.
+The project focuses on a single-chat messaging experience with basic text message exchange through GREEN-API.
 
 [Live Demo](https://green-api-livid.vercel.app/)
 
@@ -15,7 +15,7 @@ This project was developed as a technical assignment. It focuses on a single-cha
 * Start a conversation by entering a recipient's phone number.
 * Send text messages.
 * Receive incoming text messages through long polling.
-* Display incoming and outcoming messages in a chat interface.
+* Display incoming and outgoing messages in a chat interface.
 
 ## ✦ Tech Stack
 
