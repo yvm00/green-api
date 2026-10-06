@@ -1,75 +1,71 @@
-# React + TypeScript + Vite
+# ✦ WhatsApp Chat — GREEN-API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple WhatsApp-style chat interface built with React and TypeScript, powered by GREEN-API.
+This project was developed as a technical assignment. It focuses on a single-chat messaging experience and basic text message exchange through GREEN-API.
 
-Currently, two official plugins are available:
+[Live Demo](https://green-api-livid.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✦ Demo
 
-## React Compiler
+<img width="100%" height="674" alt="chat" src="https://github.com/user-attachments/assets/405658a7-0e7d-4616-91fc-4f97908941eb" />
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✦ Features
 
-## Expanding the ESLint configuration
+* Connect to GREEN-API using instance credentials.
+* Start a conversation by entering a recipient's phone number.
+* Send text messages.
+* Receive incoming text messages through long polling.
+* Display incoming and outcoming messages in a chat interface.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ✦ Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* React
+* TypeScript
+* Tailwind CSS 4
+* GREEN-API
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ✦ Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
 
-```
+* Node.js and npm
+* An authorized GREEN-API instance
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+### Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Clone the repository:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+   ```bash
+   git clone https://github.com/yvm00/green-api.git
+   ```
 
-```
+2. Navigate to the project directory:
+
+   ```bash
+   cd green-api
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open the local URL displayed in your terminal.
+
+## ✦ Configuration
+
+Enter your `idInstance` and `apiTokenInstance` in the connection form.
+
+The application uses GREEN-API to send and receive WhatsApp text messages.
+
+
+## ✦ Credits
+
+Designed and developed by **[@yvm00](https://github.com/yvm00)**
