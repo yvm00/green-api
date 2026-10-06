@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Message } from "../types/message";
 import MessageBubble from "./MessageBubble";
+import { MessagesCircle, SendHorizonal, User } from "lucide-react";
 
 interface Props {
   messages: Message[];
@@ -31,7 +32,7 @@ export default function ChatScreen({
       formattedPhone = "7" + formattedPhone.slice(1);
     }
 
-    const phoneRegex = /^7\d{10}\$/;
+    const phoneRegex = /^7\d{10}$/;
 
     if (!formattedPhone) {
       setPhoneError("Phone number is required");
@@ -42,6 +43,8 @@ export default function ChatScreen({
       setPhoneError("Format must be 79991234567 (11 digits, starts with 7)");
       return;
     }
+
+    setPhoneNumber(formattedPhone); 
     onStartChat(formattedPhone);
   };
 
@@ -57,9 +60,7 @@ export default function ChatScreen({
         {!chatStarted ? (
           <div className="flex-1 flex flex-col justify-center items-center gap-4 w-full">
             <div className="w-14 h-14 bg-emerald-50 rounded-full flex items-center justify-center">
-              <span className="material-symbols-outlined text-emerald-600 text-[28px]">
-                forum
-              </span>
+              <MessagesCircle className="text-emerald-600" size={28} />
             </div>
 
             <div className="text-center w-full">
@@ -103,9 +104,7 @@ export default function ChatScreen({
           <div className="flex flex-col h-full w-full justify-between">
             <div className="pb-3 border-b border-gray-100 flex items-center gap-3">
               <div className="w-10 h-10 bg-emerald-50 rounded-full flex items-center justify-center">
-                <span className="material-symbols-outlined text-emerald-600 text-[20px]">
-                  person
-                </span>
+                <User className="ext-emerald-600" size={20} />
               </div>
               <div>
                 <p className="text-sm font-semibold text-black">
@@ -136,9 +135,7 @@ export default function ChatScreen({
                 className="bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl w-[42px] h-[42px] flex items-center justify-center transition-colors shadow-xs shrink-0"
                 onClick={handleSend}
               >
-                <span className="material-symbols-outlined text-[20px] ml-0.5">
-                  send
-                </span>
+                <SendHorizonal size={15} />
               </button>
             </div>
           </div>
